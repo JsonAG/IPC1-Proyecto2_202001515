@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PelisCalidad</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    .card {
+      width: 300px;
+      height: 200px;
+      margin: 10px; 
+    }
+  </style>
+
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="logopeli.png" alt="Logo" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">PelisCalidad</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">Acerca de</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contáctanos</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="login.html">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="signup.html">Registrarme</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="card-container">
+    <div class="card">
+      <form action="/submit" method="post">
+        <div class="form-floating mb-3">
+          <label for="floatingInput">Correo</label>
+          <input type="email" class="form-control" id="floatingInput" name="correo" placeholder="name@example.com">
+        </div>
+        <div class="form-floating mb-3">
+          <label for="floatingInput">Contraseña</label>
+          <input type="password" class="form-control" id="floatingPassword" name="contraseña" placeholder="Contraseña">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

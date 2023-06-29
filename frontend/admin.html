@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Películas</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+    .upload-btn-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+    .btn-upload {
+      border: 2px solid gray;
+      color: gray;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .upload-btn-wrapper input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+    }
+    .movie-table {
+      margin-top: 20px;
+    }
+    .movie-table th,
+    .movie-table td {
+      padding: 8px;
+      text-align: left;
+    }
+    .youtube-link {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="logopeli.png" alt="Logo" height="30">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">PelisCalidad</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">Acerca de</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contact.html">Contáctanos</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="upload-btn-wrapper">
+      <button class="btn-upload">Cargar archivo CSV</button>
+      <input type="file" name="csvFile" id="csvFile" accept=".csv">
+    </div>
+
+    <table class="table movie-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Género</th>
+          <th>Clasificación</th>
+          <th>Año</th>
+          <th>Duración</th>
+          <th>Link YouTube</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script>
+    // Función para leer el archivo CSV y mostrar los datos en la tabla
+    function readCSV(file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var contents = e.target.result;
+        var lines = contents.split('\n');
+
+        var tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        for (var i = 0; i < lines.length; i++) {
+          var row = lines[i].split(';');
+          if (row.length === 6) {
+            var newRow = document.createElement('tr');
+            for (var j = 0; j < 6; j++) {
+              var cell = document.createElement('td');
+              if (j === 5) {
+                var link = document.createElement('a');
+                link.href = row[j];
+                link.textContent = 'Ver en YouTube';
+                link.target = '_blank';
+                link.classList.add('youtube-link');
+                cell.appendChild(link);
+              } else {
+                cell.textContent = row[j];
+              }
+              newRow.appendChild(cell);
+            }
+            tableBody.appendChild(newRow);
+          }
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Evento al seleccionar un archivo
+    var fileInput = document.getElementById('csvFile');
+    fileInput.addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (file && file.name.endsWith('.csv')) {
+        readCSV(file);
+      }
+    });
+  </script>
+</body>
+</html>
